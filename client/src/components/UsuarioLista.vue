@@ -1,45 +1,24 @@
+<!-- filepath: /C:/Users/ruth.silva/Desktop/API4S/client/src/components/UsuarioLista.vue -->
 <template>
-    <div>
-        <h1>Lista de Usuários</h1>
-        <button @click="carregarUsuarios">Carregar Usuários</button>
-        <ul>
-            <li v-for="usuario in usuarios" :key="usuario.id">
-                <span>{{ usuario.nome }} - {{ usuario.email }}</span>
-                <button @click="editarUsuario(usuario.id)">Editar</button>
-                <button @click="deletarUsuario(usuario.id)">Excluir</button>
-            </li>
-        </ul>
-    </div>
+  <div>
+    <h1>Lista de Usuários</h1>
+    <ul>
+      <li v-for="user in users" :key="user.id">{{ user.nome }} - {{ user.email }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-import axios from 'axios';
-
 export default {
-    computed: {
-        ...mapState(['usuarios']),
-    },
-    methods: {
-        ...mapActions(['fetchUsuarios']),
-        carregarUsuarios() {
-            this.fetchUsuarios();
-        },
-        editarUsuario(id) {
-            // Redireciona para a página de edição de usuário
-            this.$router.push(`/usuarios/${id}/editar`);
-        },
-        deletarUsuario(id) {
-            axios.delete(`http://localhost:8080/api/usuarios/${id}`)
-                .then(() => {
-                    this.fetchUsuarios();  // Recarrega a lista de usuários após a exclusão
-                    alert('Usuário excluído com sucesso!');
-                })
-                .catch(error => {
-                    console.error("Erro ao excluir usuário", error);
-                    alert('Erro ao excluir usuário');
-                });
-        }
-    }
+  name: 'UsuarioLista',
+  data() {
+    return {
+      users: [
+        { id: 1, nome: 'Usuário 1', email: 'usuario1@example.com' },
+        { id: 2, nome: 'Usuário 2', email: 'usuario2@example.com' },
+        { id: 3, nome: 'Usuário 3', email: 'usuario3@example.com' }
+      ]
+    };
+  }
 };
 </script>

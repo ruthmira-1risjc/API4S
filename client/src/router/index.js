@@ -1,28 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue'; // Página inicial
-import UsuariosLista from '../components/UsuarioLista.vue'; // Página de Lista de Usuários
-import UsuariosForm from '../components/UsuarioForm.vue'; // Página de Formulário de Usuário
+import HomeView from '../views/HomeView.vue';
+import UsuariosView from '../views/UsuariosView.vue';
+import CriarUsuarioView from '../views/CriarUsuarioView.vue';
 
 const routes = [
-  {
-    path: '/',
-    component: Home, // Página inicial
-    children: [
-      {
-        path: 'usuarios',
-        component: UsuariosLista, // Lista de Usuários
-      },
-      {
-        path: 'usuarios/form',
-        component: UsuariosForm, // Formulário de Usuário
-      },
-    ],
-  },
+  { path: '/', name: 'Home', component: HomeView },
+  { path: '/usuarios', name: 'Usuarios', component: UsuariosView },
+  { path: '/criar-usuario', name: 'CriarUsuario', component: CriarUsuarioView }
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 });
 
 export default router;
